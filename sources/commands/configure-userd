@@ -1,0 +1,27 @@
+#!/bin/sh
+# UserD init file
+echo "[Unit]" > /etc/systemd/system/userd.service
+echo "Description=/etc/userd.local" >> /etc/systemd/system/userd.service
+echo "ConditionPathExists=/etc/userd.local" >> /etc/systemd/system/userd.service
+echo "" >> /etc/systemd/system/userd.service
+echo "[Service]" >> /etc/systemd/system/userd.service
+echo "Type=forking" >> /etc/systemd/system/userd.service
+echo "ExecStart=/etc/userd.local start" >> /etc/systemd/system/userd.service
+echo "TimeoutSec=0" >> /etc/systemd/system/userd.service
+echo "StandardOutput=tty" >> /etc/systemd/system/userd.service
+echo "RemainAfterExit=yes" >> /etc/systemd/system/userd.service
+echo "Restart=on-failure" >> /etc/systemd/system/userd.service
+echo "RestartSec=3s" >> /etc/systemd/system/userd.service
+echo "" >> /etc/systemd/system/userd.service
+echo "[Install]" >> /etc/systemd/system/userd.service
+echo "WantedBy=multi-user.target" >> /etc/systemd/system/userd.service
+chmod 644 /etc/systemd/system/userd.service
+
+# UserD configuration file
+echo "#!/bin/sh -e" > /etc/userd.local
+echo "# By default this script does nothing." >> /etc/userd.local
+echo "exit 0" >> /etc/userd.local
+chmod +x /etc/userd.local
+
+# Enable UserD
+systemctl enable userd
