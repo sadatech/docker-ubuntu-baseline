@@ -1,5 +1,5 @@
 FROM scratch
-ADD /sources/images/ubuntu-focal-oci-amd64-root.tar.gz /
+ADD /sources/images/ubuntu-bionic-oci-amd64-root.tar.gz /
 
 # System Environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -37,5 +37,5 @@ RUN rm -rf /tmp/* && \
 # Container Environment
 CMD ["/systemd"]
 LABEL maintainer="Andika Muhammad Cahya <andkmc99@gmail.com>"
-LABEL version="Ubuntu SystemD build 2201121355 based on Ubuntu 20.04 Focal"
+LABEL version="Ubuntu SystemD build 2201221602 based on Ubuntu 18.04 Focal"
 WORKDIR /root
