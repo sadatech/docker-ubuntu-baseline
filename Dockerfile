@@ -10,6 +10,7 @@ RUN sed -i "s/archive.ubuntu.com/mirror.dknet.my.id/g" /etc/apt/sources.list && 
     apt -y update && \
     apt -y install sudo systemd rsyslog cron locales dos2unix nano git htop
 RUN apt -y install iputils-ping
+RUN apt -y install libutempter0 screen curl tzdata wget
 
 # Create shortcut SystemD
 RUN ln -sf /lib/systemd/systemd /systemd
