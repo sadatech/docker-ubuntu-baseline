@@ -20,12 +20,16 @@ ADD /sources/commands /tmp
 RUN dos2unix /tmp/configure-* && \
     chmod +x /tmp/configure-* && \
     sh -c /tmp/configure-userd && \
+    sh -c /tmp/configure-healthcheck && \
     sh -c /tmp/configure-container
 
 # Configure Script
 ADD /sources/scripts /usr/local/bin
 RUN dos2unix /usr/local/bin/* && \
     chmod +x /usr/local/bin/*
+
+# Add healthcheck files
+ADD /sources/healthcheck /opt/healthcheck
 
 # Clear Temp
 RUN rm -rf /tmp/* && \
@@ -37,6 +41,7 @@ RUN rm -rf /tmp/* && \
 
 # Container Environment
 CMD ["/systemd"]
+HEALTHCHECK CMD node /opt/healthcheck/monitor.js
 LABEL maintainer="Andika Muhammad Cahya <andkmc99@gmail.com>"
 LABEL version="Ubuntu SystemD build 2201221602 based on Ubuntu 18.04 Focal"
 WORKDIR /root
