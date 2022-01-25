@@ -37,6 +37,7 @@ RUN rm -rf /tmp/* && \
     apt -yqq autoremove \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* && \
+    touch /var/log/installed.log && \
     rm /var/log/*.log
 
 # Container Environment
