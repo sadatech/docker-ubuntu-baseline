@@ -20,6 +20,7 @@ ADD /sources/commands /tmp
 RUN dos2unix /tmp/configure-* && \
     chmod +x /tmp/configure-* && \
     sh -c /tmp/configure-userd && \
+    sh -c /tmp/configure-openssh && \
     sh -c /tmp/configure-healthcheck && \
     sh -c /tmp/configure-container
 
